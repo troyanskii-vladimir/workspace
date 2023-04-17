@@ -3,20 +3,14 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <title>Моя первая страница</title>
+    <title>Моя первая игра</title>
   </head>
   <body>
-    <p>Hellow Word!1111</p>
-    <form class="form" action="https://echo.htmlacademy.ru/" method="post">
-      <fieldset class="fieldgroup">
-        <legend class="fieldgroup__header">Введите данные</legend>
-        <label class="block__title" for="name">Имя*:</label>
-        <input class="block__input" type="text" name="name" required>
-        <button type="submit">Подтвердить</button>
-      </fieldset>
-    </form>
+    <h3>Игра виселица</h3>
+    <button class="new-word__button">Новое слово</button>
     <br>
     <div class="screen">
+      <div class="example__word"></div>
       <div class="screen__inside"></div>
     </div>
     <br>
@@ -57,10 +51,22 @@
       <button class="button__letter" value="ю">Ю</button>
     </div>
 
+    <div class="wrong__counter">
+      <h4>Кол-во попыток</h4>
+      <div class="wrong__collector">
+        <div class="wrong__cube"></div>
+        <div class="wrong__cube"></div>
+        <div class="wrong__cube"></div>
+        <div class="wrong__cube"></div>
+      </div>
+    </div>    
+
     <template id="input__letter-template">
       <div class="input__letter">
         <p class="input__letter-once"></p>
       </div>
     </template>
+
+    <script src="main.js"></script>
   </body>
 </html>
