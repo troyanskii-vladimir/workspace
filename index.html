@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <title>Моя первая игра</title>
+    <title>Test JS</title>
   </head>
   <body>
-    <h3>Игра виселица</h3>
-    <button class="new-word__button">Новое слово</button>
+    <h3>Test JS</h3>
+    <!-- <button class="new-word__button">Новое слово</button> -->
     <br>
     <div class="screen">
       <div class="example__word"></div>
@@ -59,7 +59,17 @@
         <div class="wrong__cube"></div>
         <div class="wrong__cube"></div>
       </div>
-    </div>    
+    </div>
+    
+      <div class="succes__modal hidden">
+        <h2 class="succes__title">Правильно!</h2>
+        <button class="new-word__buttons">Новое слово</button>
+      </div>
+
+      <div class="error__modal hidden">
+        <h2 class="error__title">Вы ошиблись!</h2>
+        <button class="new-word__buttons">Новое слово</button>
+      </div>
 
     <template id="input__letter-template">
       <div class="input__letter">
