@@ -1,6 +1,6 @@
 const keyboard = document.querySelector('.keyboard');
 const buttons = keyboard.querySelectorAll('.button__letter')
-const newWordButton = document.querySelector('.new-word__button');
+const newWordButton = document.querySelectorAll('.new-word__buttons');
 
 const exampleWord = document.querySelector('.example__word');
 const inputScreen = document.querySelector('.screen__inside');
@@ -76,7 +76,6 @@ const FINAL_WORDS = [{
 }];
 
 
-
 const getRandomNumber = (min, max) => {
     const result = Math.random() * (max - min + 1) + min;
     return Math.floor(result);
@@ -103,8 +102,6 @@ function createIdGenerator (min, max) {
 const generateIdPhoto = createIdGenerator(1, FINAL_WORDS.length - 1);
 
 
-
-
 const drawInputLetters = (letter) => {
     const letterElement = inputLetterTemplate.cloneNode(true);
     letterElement.querySelector('.input__letter-once').textContent = letter;
@@ -120,6 +117,7 @@ const drawBaseLetters = (word) => {
 }
 
 let wrongCounter = -1;
+let correctCounter = 0;
 
 
 const wrongContainer = document.querySelector('.wrong__collector');
@@ -135,20 +133,31 @@ const clickButtonKeyboardHandler = (evt) => {
     currentWord = currentWord.join('');
 
     if (currentWord.includes(evt.target.value)) {
+        evt.target.style.backgroundColor = 'green';
+        evt.target.disabled = 'true';
         nowContainer = document.querySelector('.screen__inside');
         drawedElements = nowContainer.querySelectorAll('div');
    
         for (let i = 0; i < drawedElements.length; i++) {
             if (drawedElements[i].getAttribute('data-value') == evt.target.value) {
                 drawedElements[i].querySelector('.input__letter-once').style.opacity = '1';
+                correctCounter++;
             }
         }
+
+        if (correctCounter == drawedElements.length) {
+            document.querySelector('.succes__modal').classList.remove('hidden');
+        }
     } else {
-        console.log('Ошибка. Не та буква')
+        evt.target.style.backgroundColor = 'red';
+        evt.target.disabled = 'true';
         wrongCounter++;
         wrongOnce[wrongCounter].style.backgroundColor = 'red';
+
+        if (wrongCounter == 3) {
+            document.querySelector('.error__modal').classList.remove('hidden');
+        }
     }
-    console.log(wrongCounter);
 }
 
 
@@ -163,15 +172,11 @@ const newWord = (time) => {
 }
 
 
-
-
 newWord(0);
 
 
-
-
-
-newWordButton.addEventListener('click', () => {
+newWordButton[0].addEventListener('click', () => {
+    console.log('wetwtwte')
     let test1 = exampleWord.querySelectorAll('div');
     let test2 = inputScreen.querySelectorAll('div');
     test1.forEach(elem => {
@@ -182,15 +187,45 @@ newWordButton.addEventListener('click', () => {
     });
     buttons.forEach((button) => {
         button.removeEventListener('click', clickButtonKeyboardHandler)
+        button.removeAttribute('style');
+        button.removeAttribute('disabled');
     })
     wrongOnce.forEach(elem => {
         elem.style.backgroundColor = ('white');
     })
     wrongCounter = -1;
+    correctCounter = 0;
 
     newWord(generateIdPhoto());
+
+    document.querySelector('.succes__modal').classList.add('hidden');
+    document.querySelector('.error__modal').classList.add('hidden');
 })
 
+newWordButton[1].addEventListener('click', () => {
+    console.log('wetwtwte')
+    let test1 = exampleWord.querySelectorAll('div');
+    let test2 = inputScreen.querySelectorAll('div');
+    test1.forEach(elem => {
+        elem.remove();
+    });
+    test2.forEach(elem => {
+        elem.remove();
+    });
+    buttons.forEach((button) => {
+        button.removeEventListener('click', clickButtonKeyboardHandler)
+        button.removeAttribute('style');
+        button.removeAttribute('disabled');
+    })
+    wrongOnce.forEach(elem => {
+        elem.style.backgroundColor = ('white');
+    })
+    wrongCounter = -1;
+    correctCounter = 0;
 
+    newWord(generateIdPhoto());
 
+    document.querySelector('.succes__modal').classList.add('hidden');
+    document.querySelector('.error__modal').classList.add('hidden');
+})
 
